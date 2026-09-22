@@ -1,0 +1,86 @@
+---
+title: "Process ADMIXTURE Global Ancestry"
+author: "Peter Fiorica"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, echo = FALSE}
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(data.table)
+  library(ggplot2)
+  library(tidyverse)
+})
+
+```
+
+```{r}
+# Samples
+samples <- fread( "/projects/rpci/songyao/pnfioric/Ancestry_Calculation_PW_WCHS/k3_wchs_hgdp.txt", header = F)
+admx_samples <- fread("/vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/genome_wide_admixture_k3_wchs.fam", header = F) %>% select(V1, V2)
+
+hgdp_samples <-fread("/projects/rpci/songyao/pnfioric/MultiEthnic_TILs_GWAS/Local_Ancestry_Inference/gnomad_meta_updated.tsv", header = T)
+
+
+# RESULTS
+admixture_q <- fread("/projects/rpci/songyao/pnfioric/Ancestry_Calculation_PW_WCHS/results/genome_wide_admixture_k3_wchs.3.Q", header = F)
+colnames(admixture_q)<- c("A1", "A2", "A3")
+admx <- bind_cols(admx_samples, admixture_q)
+admx_labeled <- left_join(admx, samples, by = c("V1", "V2"))
+```
+
+```{r}
+# 1. Clean, arrange, and pivot the dataset
+admx_long <- admx_labeled %>%
+  # Select and rename relevant columns
+  select(SampleID = V1, pop = V3, starts_with("A")) %>%
+  
+  # Sort samples within each population by primary ancestry (A3, then A2, then A1)
+  # to give the bars a clean, sorted waterfall aesthetic
+  arrange(pop, desc(A3), desc(A2), desc(A1)) %>%
+  
+  # Lock in the factor order of SampleID so ggplot preserves the sorted arrangement
+  mutate(SampleID = fct_inorder(SampleID)) %>%
+  
+  # Pivot ancestry columns (A1, A2, A3) to long format
+  pivot_longer(
+    cols = starts_with("A"),
+    names_to = "Ancestry",
+    values_to = "Proportion"
+  )
+```
+
+```{r, fig.width=12, fig.height =6}
+# 2. Plot stacked bar graph faceted by population
+ggplot(admx_long, aes(x = SampleID, y = Proportion, fill = Ancestry)) +
+  geom_col(width = 1.0) +
+  facet_grid(~ pop, scales = "free_x", space = "free_x") +
+  scale_y_continuous(expand = c(0, 0), labels = scales::percent) +
+  scale_fill_brewer(palette = "Set2") +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_blank(),       # Hides individual sample IDs for large cohorts
+    axis.ticks.x = element_blank(),
+    panel.spacing = unit(0.2, "lines"),
+    panel.grid = element_blank(),
+    strip.background = element_rect(fill = "grey90", color = NA),
+    strip.text = element_text(face = "bold")
+  ) +
+  labs(
+    x = "Individual",
+    y = "Ancestry Proportion",
+    fill = "Ancestry",
+    title = "ADMIXTURE Ancestry Proportions"
+  )
+```
+
+From the plot above we can see which ancestry corresponds to which population. It is not perfect, but we have a decent idea of the situation. AFR is A1, EAS is A2, and EUR is A3. There is pronounced admixture with African American GWAS population of WCHS. 
+
+```{r}
+admx_labeled_to_write <- admx_labeled %>% rename(FID= V1, IID=V2, AFR=A1, EAS=A2, EUR=A3)
+
+wchs_to_write <- admx_labeled_to_write %>% filter(!FID %in% hgdp_samples$s)
+
+fwrite(wchs_to_write, "/projects/rpci/songyao/pnfioric/Ancestry_Calculation_PW_WCHS/results/final_wchs_results/wchs_admixture_global_ancestry.txt.gz", col.names = T, sep = "\t", quote = F, row.names = F)
+```

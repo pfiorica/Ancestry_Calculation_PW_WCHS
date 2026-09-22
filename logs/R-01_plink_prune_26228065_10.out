@@ -1,0 +1,120 @@
+============================================================
+PLINK QC + LD PRUNING
+============================================================
+Job ID:        26228075
+Array Job ID:  26228065
+Array Task ID: 10
+Chromosome:    10
+CPUs:          2
+Start:         Tue Sep 22 08:43:41 AM EDT 2026
+
+Raw prefix:    /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_raw_chr10
+Prune prefix:  /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/temp_prune_chr10
+Final prefix:  /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10
+============================================================
+
+Input files found:
+-rw-r--r-- 1 pnfioric grp-songyao 2.8G Sep 18 18:35 /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_raw_chr10.bed
+-rw-r--r-- 1 pnfioric grp-songyao  34M Sep 18 18:35 /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_raw_chr10.bim
+-rw-r--r-- 1 pnfioric grp-songyao 477K Sep 18 18:28 /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_raw_chr10.fam
+
+============================================================
+Step 1: PLINK QC + LD pruning
+============================================================
+Start: Tue Sep 22 08:43:44 AM EDT 2026
+PLINK v1.90p 64-bit (24 Sep 2022)              www.cog-genomics.org/plink/1.9/
+(C) 2005-2022 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/temp_prune_chr10.log.
+Options in effect:
+  --bfile /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_raw_chr10
+  --geno 0.05
+  --indep-pairwise 50 10 0.1
+  --maf 0.05
+  --out /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/temp_prune_chr10
+  --snps-only
+  --threads 2
+
+515292 MB RAM detected; reserving 257646 MB for main workspace.
+828169 variants loaded from .bim file.
+14466 people (0 males, 0 females, 14466 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+/vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/temp_prune_chr10.nosex
+.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 14466 founders and 0 nonfounders present.
+Calculating allele frequencies... 0%1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99% done.
+Total genotyping rate is 0.942589.
+250101 variants removed due to missing genotype data (--geno).
+334254 variants removed due to minor allele threshold(s)
+(--maf/--max-maf/--mac/--max-mac).
+243814 variants and 14466 people pass filters and QC.
+Note: No phenotypes present.
+1%2%3%4%5%6%7%8%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99%Pruned 230533 variants from chromosome 10, leaving 13281.
+Pruning complete.  230533 of 243814 variants removed.
+Writing...Marker lists written to
+/vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/temp_prune_chr10.prune.in
+and
+/vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/temp_prune_chr10.prune.out
+.
+
+Step 1 complete: Tue Sep 22 08:44:11 AM EDT 2026
+
+Number of variants retained for pruning:
+13281 /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/temp_prune_chr10.prune.in
+
+============================================================
+Step 2: Extract pruned variants
+============================================================
+Start: Tue Sep 22 08:44:11 AM EDT 2026
+PLINK v1.90p 64-bit (24 Sep 2022)              www.cog-genomics.org/plink/1.9/
+(C) 2005-2022 Shaun Purcell, Christopher Chang   GNU General Public License v3
+Logging to /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10.log.
+Options in effect:
+  --bfile /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_raw_chr10
+  --extract /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/temp_prune_chr10.prune.in
+  --make-bed
+  --out /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10
+  --threads 2
+
+515292 MB RAM detected; reserving 257646 MB for main workspace.
+828169 variants loaded from .bim file.
+14466 people (0 males, 0 females, 14466 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to
+/vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10.nosex
+.
+--extract: 13281 variants remaining.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 14466 founders and 0 nonfounders present.
+Calculating allele frequencies... 0%1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99% done.
+Total genotyping rate is 0.999063.
+13281 variants and 14466 people pass filters and QC.
+Note: No phenotypes present.
+--make-bed to
+/vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10.bed
++
+/vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10.bim
++
+/vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10.fam
+... 0%1%2%3%4%5%6%7%8%9%10%11%12%13%14%15%16%17%18%19%20%21%22%23%24%25%26%27%28%29%30%31%32%33%34%35%36%37%38%39%40%41%42%43%44%45%46%47%48%49%50%51%52%53%54%55%56%57%58%59%60%61%62%63%64%65%66%67%68%69%70%71%72%73%74%75%76%77%78%79%80%81%82%83%84%85%86%87%88%89%90%91%92%93%94%95%96%97%98%99%done.
+
+Step 2 complete: Tue Sep 22 08:44:12 AM EDT 2026
+
+============================================================
+Verifying final PLINK files
+============================================================
+
+Final files:
+-rw-rw-r-- 1 pnfioric grp-songyao  46M Sep 22 08:44 /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10.bed
+-rw-rw-r-- 1 pnfioric grp-songyao 485K Sep 22 08:44 /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10.bim
+-rw-rw-r-- 1 pnfioric grp-songyao 477K Sep 22 08:44 /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10.fam
+
+Number of final variants:
+13281 /vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/merged_pruned_chr10.bim
+
+Cleaning up intermediate pruning files...
+Cleanup complete.
+
+============================================================
+Chromosome 10 FINISHED SUCCESSFULLY
+End: Tue Sep 22 08:44:12 AM EDT 2026
+============================================================

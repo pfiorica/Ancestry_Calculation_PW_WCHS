@@ -1,0 +1,5 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) ccrenv   2) gentoo/2023.01   3) ccrsoft/2023.01
+[2026-09-22T09:03:25.805] error: *** JOB 26228101 ON cpn-c02-30 CANCELLED AT 2026-09-22T09:03:25 DUE to SIGNAL Terminated ***
