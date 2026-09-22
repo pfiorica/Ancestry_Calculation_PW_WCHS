@@ -1,8 +1,6 @@
 ---
 title: "ADMIXTURE Estimation for WCHS and Pathways"
 author: "Peter Fiorica"
-date: "`r Sys.Date()`"
-output: html_document
 ---
 
 # Introduction
