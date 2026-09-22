@@ -26,7 +26,7 @@ The plan this time is to use ADMIXTURE [1]. ADMIXTURE allows for global ancestry
 
 3.  `01_Pruning_Merged.sh`: This performs the LD pruning before running ADMIXTURE on the data.
 
-4.   `02_merge_pruned_chr.sh` : This combines all the pruned chromosome level data
+4.  `02_merge_pruned_chr.sh` : This combines all the pruned chromosome level data
 
 5.  `03_Subset_Reference_WCHS.R` : This subsets the data to include only the 3 super populations from the reference data and WCHS data. We remove Pathways and samples that are not EUR, EAS, or AFR here.
 
