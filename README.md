@@ -26,7 +26,7 @@ The plan this time is to use ADMIXTURE [1]. ADMIXTURE allows for global ancestry
 
 4.  `02_merge_pruned_chr.sh` : This combines all the pruned chromosome level data
 
-5.  `03_Subset_Reference_WCHS.R` : This subsets the data to include only the 3 super populations from the reference data and WCHS data. We remove Pathways and samples that are not EUR, EAS, or AFR here.
+5.  `03_Subset_Reference_WCHS.R` : This subsets the data to include only the 3 super populations from the reference data and WCHS data. We remove Pathways and samples that are not EUR, EAS, or AFR here. `03_Subset_Reference.R` is used for both Pathways and WCHS analysis.
 
 6.  `04_keep_list_k3.sh`: The actual plink command that filters the genotypes. Subset data to k=3.
 

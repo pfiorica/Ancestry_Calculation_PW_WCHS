@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=03_admix_global_ancestry
+#SBATCH --job-name=05_admix_global_ancestry
 #SBATCH --output=logs/R-%x_%A_%a.out         # Logs: logs/admix_global_ancestry_<JobID>_<ArrayID>.out
 #SBATCH --error=logs/R-%x_%A_%a.err          # Errors: logs/admix_global_ancestry_<JobID>_<ArrayID>.err
 #SBATCH --nodes=1
@@ -19,7 +19,7 @@ module purge
 #module load admixture/1.3.0
 
 # Define variables
-INPUT_BED="/vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/genome_wide_admixture_k3_wchs.bed"  # Path to your QC/LD-pruned PLINK bed file
+INPUT_BED="/vscratch/grp-songyao/pnfioric/temp_dir/WCHS_Pathways_HGDP_by_chr/genome_wide_admixture_k3_pw_wchs.bed"  # Path to your QC/LD-pruned PLINK bed file
 K_VAL=${SLURM_ARRAY_TASK_ID}
 THREADS=${SLURM_CPUS_PER_TASK}
 SEED=$((1000 + K_VAL * 37))  # Unique deterministic seed per K
